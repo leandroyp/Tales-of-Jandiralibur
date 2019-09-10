@@ -1,11 +1,220 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Mob.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Hero.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Hero.gd" type="Script" id=3]
+[ext_resource path="res://assets/heros/hero_left_2.png" type="Texture" id=4]
+[ext_resource path="res://Sprite.gd" type="Script" id=5]
+[ext_resource path="res://Colors/Dungeon text1.png" type="Texture" id=6]
+[ext_resource path="res://Colors/Vermelho.png" type="Texture" id=7]
+[ext_resource path="res://Colors/verde.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "left",
+"speed": 5.0
+} ]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
 Mob = ExtResource( 2 )
 
-[node name="Hero" parent="." instance=ExtResource( 3 )]
+[node name="Hero" type="KinematicBody2D" parent="."]
+position = Vector2( 575, 450 )
+z_index = 1
+script = ExtResource( 3 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="Hero"]
+
+[node name="Sprite" type="AnimatedSprite" parent="Hero"]
+position = Vector2( -103.929, 1.24005 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+animation = "left"
+offset = Vector2( 207.857, -2.4801 )
+script = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="Hero"]
+
+[node name="Position2D" type="Position2D" parent="Hero"]
+position = Vector2( 550, 475 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 798.0
+margin_bottom = 584.0
+mouse_filter = 2
+texture = ExtResource( 6 )
+expand = true
+
+[node name="HUD_Combat" type="Control" parent="."]
+margin_top = -0.950012
+margin_bottom = -0.950012
+mouse_filter = 2
+
+[node name="ColorRect2" type="ColorRect" parent="HUD_Combat"]
+margin_left = 0.239899
+margin_top = 579.955
+margin_right = 800.24
+margin_bottom = 799.955
+mouse_filter = 2
+color = Color( 0.494118, 0.180392, 0.705882, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="HUD_Combat"]
+margin_left = 25.0
+margin_top = 590.0
+margin_right = 775.0
+margin_bottom = 790.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="HUD_Combat"]
+margin_left = 400.0
+margin_top = 590.0
+margin_right = 775.0
+margin_bottom = 790.0
+mouse_filter = 2
+color = Color( 0.109804, 0.176471, 0.517647, 1 )
+
+[node name="HUD_Combat_Player" type="Control" parent="HUD_Combat"]
+mouse_filter = 2
+
+[node name="PlayerHP1" type="TextureProgress" parent="HUD_Combat/HUD_Combat_Player"]
+margin_left = 540.0
+margin_top = 660.0
+margin_right = 684.0
+margin_bottom = 677.0
+mouse_filter = 2
+value = 100.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+
+[node name="PlayerHP2" type="TextureProgress" parent="HUD_Combat/HUD_Combat_Player"]
+margin_left = 540.0
+margin_top = 690.0
+margin_right = 684.0
+margin_bottom = 707.0
+mouse_filter = 2
+value = 100.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+
+[node name="PlayerHP3" type="TextureProgress" parent="HUD_Combat/HUD_Combat_Player"]
+margin_left = 540.0
+margin_top = 720.0
+margin_right = 684.0
+margin_bottom = 737.0
+mouse_filter = 2
+value = 100.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+
+[node name="NamePlayer1" type="Label" parent="HUD_Combat/HUD_Combat_Player"]
+margin_left = 470.0
+margin_top = 660.0
+margin_right = 517.0
+margin_bottom = 674.0
+text = "Player1"
+
+[node name="NamePlayer2" type="Label" parent="HUD_Combat/HUD_Combat_Player"]
+margin_left = 470.0
+margin_top = 690.0
+margin_right = 517.0
+margin_bottom = 704.0
+text = "Player2"
+
+[node name="NamePlayer3" type="Label" parent="HUD_Combat/HUD_Combat_Player"]
+margin_left = 470.0
+margin_top = 720.0
+margin_right = 517.0
+margin_bottom = 734.0
+text = "Player3"
+
+[node name="Button" type="Button" parent="HUD_Combat/HUD_Combat_Player"]
+margin_left = 697.0
+margin_top = 660.0
+margin_right = 754.0
+margin_bottom = 680.0
+text = "Ataque"
+
+[node name="Button2" type="Button" parent="HUD_Combat/HUD_Combat_Player"]
+margin_left = 697.0
+margin_top = 690.0
+margin_right = 753.0
+margin_bottom = 710.0
+text = "Defesa"
+
+[node name="Button3" type="Button" parent="HUD_Combat/HUD_Combat_Player"]
+margin_left = 697.0
+margin_top = 720.0
+margin_right = 753.0
+margin_bottom = 740.0
+text = "Item"
+
+[node name="HUD_Combat_Monster" type="Control" parent="HUD_Combat"]
+editor/display_folded = true
+mouse_filter = 2
+
+[node name="NameMonster1" type="Label" parent="HUD_Combat/HUD_Combat_Monster"]
+margin_left = 40.9025
+margin_top = 660.0
+margin_right = 101.902
+margin_bottom = 674.0
+rect_pivot_offset = Vector2( -280, -20 )
+text = "Monstro1"
+
+[node name="NameMonster2" type="Label" parent="HUD_Combat/HUD_Combat_Monster"]
+margin_left = 40.903
+margin_top = 690.0
+margin_right = 101.903
+margin_bottom = 721.0
+text = "Monstro2
+"
+
+[node name="NameMonster3" type="Label" parent="HUD_Combat/HUD_Combat_Monster"]
+margin_left = 40.0
+margin_top = 720.902
+margin_right = 101.0
+margin_bottom = 734.902
+text = "Monstro3"
+
+[node name="MonsterHP1" type="TextureProgress" parent="HUD_Combat/HUD_Combat_Monster"]
+margin_left = 108.0
+margin_top = 660.0
+margin_right = 252.0
+margin_bottom = 677.0
+rect_pivot_offset = Vector2( 552, -8800 )
+mouse_filter = 2
+value = 100.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+
+[node name="MonsterHP2" type="TextureProgress" parent="HUD_Combat/HUD_Combat_Monster"]
+margin_left = 108.0
+margin_top = 690.0
+margin_right = 252.0
+margin_bottom = 707.0
+mouse_filter = 2
+value = 100.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+
+[node name="MonsterHP3" type="TextureProgress" parent="HUD_Combat/HUD_Combat_Monster"]
+margin_left = 108.072
+margin_top = 720.0
+margin_right = 252.072
+margin_bottom = 737.0
+mouse_filter = 2
+value = 100.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+[connection signal="button_down" from="HUD_Combat/HUD_Combat_Player/Button" to="." method="_on_Button_button_down"]

@@ -1,46 +1,68 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Mob.gd" type="Script" id=1]
-[ext_resource path="res://assets/mobs/bat_1.png" type="Texture" id=2]
-[ext_resource path="res://assets/mobs/bat_2.png" type="Texture" id=3]
-[ext_resource path="res://assets/mobs/bat_3.png" type="Texture" id=4]
-[ext_resource path="res://assets/mobs/explosion_1.png" type="Texture" id=5]
-[ext_resource path="res://assets/mobs/explosion_2.png" type="Texture" id=6]
-[ext_resource path="res://assets/mobs/explosion_3.png" type="Texture" id=7]
-[ext_resource path="res://assets/mobs/explosion_4.png" type="Texture" id=8]
-[ext_resource path="res://assets/mobs/explosion_5.png" type="Texture" id=9]
-[ext_resource path="res://assets/mobs/explosion_6.png" type="Texture" id=10]
-[ext_resource path="res://assets/mobs/explosion_7.png" type="Texture" id=11]
+[ext_resource path="res://assets/mobs/explosion_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/mobs/explosion_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/mobs/explosion_3.png" type="Texture" id=4]
+[ext_resource path="res://assets/mobs/explosion_4.png" type="Texture" id=5]
+[ext_resource path="res://assets/mobs/explosion_5.png" type="Texture" id=6]
+[ext_resource path="res://assets/mobs/explosion_6.png" type="Texture" id=7]
+[ext_resource path="res://assets/mobs/explosion_7.png" type="Texture" id=8]
+[ext_resource path="res://assets/mobs/bat_1.png" type="Texture" id=9]
+[ext_resource path="res://assets/mobs/bat_2.png" type="Texture" id=10]
+[ext_resource path="res://assets/mobs/bat_3.png" type="Texture" id=11]
+[ext_resource path="res://pixelart_font.ttf" type="DynamicFontData" id=12]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 52.6161
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "Bat",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "death",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "Bat",
+"speed": 5.0
 } ]
 
+[sub_resource type="DynamicFont" id=3]
+size = 30
+outline_size = 2
+outline_color = Color( 0.301961, 0, 0, 1 )
+font_data = ExtResource( 12 )
+
 [node name="Mob" type="Area2D"]
+position = Vector2( -21, 10 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 400, 400 )
+scale = Vector2( 0.45, 0.45 )
 frames = SubResource( 2 )
 animation = "Bat"
+frame = 1
 playing = true
 
 [node name="MonsterHP" type="Label" parent="."]
-margin_left = 350.0
-margin_top = 300.0
-margin_right = 448.0
-margin_bottom = 346.0
+margin_left = -50.0
+margin_top = -40.0
+margin_right = 48.0
+margin_bottom = 6.0
+rect_pivot_offset = Vector2( 68.7369, 7.05264 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0.113725, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "0"
+align = 1
+valign = 1
+[connection signal="input_event" from="." to="." method="_on_Mob_input_event"]

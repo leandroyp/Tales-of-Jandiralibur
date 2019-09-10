@@ -6,6 +6,7 @@ var xpNeeded = 25
 var heroHp = 25
 var heroDmg = 5
 var heroLevel = 1
+var idMobs = ["First", "Second", "Third",'teste']
 
 # Dicionário dos mobs:
 # Multipliers de HP, DANO e XP
@@ -28,7 +29,15 @@ var mobLevelsOnFloors = {
 	4: [5, 5, 5, 5, 5, 5]
 	}
 	
+var startPositionsBat = [
+[200, 275],
+[275, 350],
+[200, 425],
+[400, 400]]
+
+ 
+	
 func _ready():
 	pass
 
-	
+
